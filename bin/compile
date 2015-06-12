@@ -17,4 +17,8 @@ if [ -d "$env_dir" ]; then
   done
 fi
 
-cd $build_dir && bundle exec rake $DEPLOY_TASKS
+tasks=${DEPLOY_TASKS-db:migrate}
+
+echo "Running rake $tasks"
+
+cd $build_dir && bundle exec rake $tasks
