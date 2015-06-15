@@ -17,6 +17,12 @@ if [ -d "$env_dir" ]; then
   done
 fi
 
+echo "WARNING: buildpack-ruby-db-migrate has been deprecated in favor of buildpack-rake-deploy-tasks"
+
+if [ -z "$DEPLOY_TASKS" ]; then 
+  echo "DEPLOY_TASKS has not been set. Defaulting to running rake db:migrate"
+fi
+
 tasks=${DEPLOY_TASKS-db:migrate}
 
 echo "Running rake $tasks"
